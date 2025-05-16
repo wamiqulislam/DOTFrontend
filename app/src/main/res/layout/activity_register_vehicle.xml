@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/etRiderId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Rider ID"
+            android:inputType="number"/>
+
+        <Spinner
+            android:id="@+id/spinnerVehicleType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/vehicle_type_prompt"/>
+
+        <EditText
+            android:id="@+id/etModel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Model"/>
+
+        <EditText
+            android:id="@+id/etLicense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="License Number"/>
+
+        <Spinner
+            android:id="@+id/spinnerVehicleStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/vehicle_status_prompt"/>
+
+        <EditText
+            android:id="@+id/etCapacity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Capacity"
+            android:inputType="number"/>
+
+        <Button
+            android:id="@+id/btnRegisterVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register Vehicle"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">DOTFrontend</string>
+    <string-array name="account_type_array">
+        <item>Customer</item>
+        <item>Rider</item>
+        <item>Admin</item>
+    </string-array>
+    <string name="account_type_prompt">Select Account Type</string>
+    <!-- Parcel type (e.g. “Standard”, “Express”, etc) -->
+    <string-array name="parcel_type_array">
+        <item>Standard</item>
+        <item>Express</item>
+        <!-- add your other types here -->
+    </string-array>
+    <string name="parcel_type_prompt">Select Parcel Type</string>
+
+    <!-- Parcel status -->
+    <string-array name="parcel_status_array">
+        <item>WAITING</item>
+        <item>IN_TRANSIT</item>
+        <item>DELIVERED</item>
+        <item>CANCELLED</item>
+    </string-array>
+    <string name="parcel_status_prompt">Select Parcel Status</string>
+
+    <!-- Vehicle types -->
+    <string-array name="vehicle_type_array">
+        <item>TRUCK</item>
+        <item>SHIP</item>
+        <item>AIRPLANE</item>
+    </string-array>
+    <string name="vehicle_type_prompt">Select Vehicle Type</string>
+
+    <!-- Vehicle status (your enum values) -->
+    <string-array name="vehicle_status_array">
+        <item>AVAILABLE</item>
+        <item>IN_TRANSIT</item>
+        <item>NOT_AVAILABLE</item>
+    </string-array>
+    <string name="vehicle_status_prompt">Select Vehicle Status</string>
+
+</resources>
