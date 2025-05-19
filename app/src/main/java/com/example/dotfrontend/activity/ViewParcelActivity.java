@@ -76,7 +76,6 @@ public class ViewParcelActivity extends AppCompatActivity {
                                 .append(log.getLocation() != null
                                         ? log.getLocation().getCity()
                                         : "N/A").append("\n")
-                                .append("Current Rider ID: ")
                                 .append("Delivered Date: ").append(log.getDeliveredDate());
 
                         textParcelInfo.setText(sb.toString());

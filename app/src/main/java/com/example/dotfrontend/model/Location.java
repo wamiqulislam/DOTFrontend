@@ -14,8 +14,7 @@ import lombok.Setter;
 
 public class Location {
 
-    private Long locationId;
-
+    private long locationId;
     private String country;
     private String city;
 }

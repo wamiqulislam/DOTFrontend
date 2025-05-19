@@ -15,11 +15,23 @@ import java.util.List;
 import java.util.Set;
 
 public class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.BatchViewHolder> {
+    public interface OnBatchClickListener { void onBatchClick(Batch batch); }
+
     private final List<Batch> batches;
     private final Set<Long> selectedIds = new HashSet<>();
+    private OnBatchClickListener listener;
 
     public BatchAdapter(List<Batch> batches) {
         this.batches = batches;
+    }
+
+    public BatchAdapter(List<Batch> batches, OnBatchClickListener listener) {
+        this.batches = batches;
+        this.listener = listener;
+    }
+
+    public void setOnBatchClickListener(OnBatchClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -31,26 +43,29 @@ public class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.BatchViewHol
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BatchViewHolder holder, int position) {
-        Batch b = batches.get(position);
+    public void onBindViewHolder(@NonNull BatchViewHolder holder, int pos) {
+        Batch b = batches.get(pos);
         holder.tvBatchId.setText("Batch #" + b.getBatchId());
         holder.tvDestination.setText(
-                b.getDestination().getCity() + ", " + b.getDestination().getCountry()
+                "Dest: " + b.getDestination().getCity() + ", " + b.getDestination().getCountry()
         );
+        holder.tvCurrentLocation.setText(
+                "Current: " + b.getCurrentLocation().getCity() + ", " + b.getCurrentLocation().getCountry()
+        );
+        holder.tvWeight.setText("Weight: " + b.getWeight());
+        holder.tvStatus.setText("Status: " + b.getStatus().name());
 
-        // prevent unwanted recursion when recycling views
         holder.cbSelect.setOnCheckedChangeListener(null);
         holder.cbSelect.setChecked(selectedIds.contains(b.getBatchId()));
-
-        holder.cbSelect.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) selectedIds.add(b.getBatchId());
+        holder.cbSelect.setOnCheckedChangeListener((cb, checked) -> {
+            if (checked) selectedIds.add(b.getBatchId());
             else selectedIds.remove(b.getBatchId());
         });
 
-        // clicking the whole row also toggles the checkbox
         holder.itemView.setOnClickListener(v -> {
             boolean newState = !holder.cbSelect.isChecked();
             holder.cbSelect.setChecked(newState);
+            if (listener != null) listener.onBatchClick(b);
         });
     }
 
@@ -59,7 +74,6 @@ public class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.BatchViewHol
         return batches.size();
     }
 
-    /** Replace the adapter’s data and clear previous selections */
     public void updateData(List<Batch> newBatches) {
         batches.clear();
         batches.addAll(newBatches);
@@ -67,26 +81,26 @@ public class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.BatchViewHol
         notifyDataSetChanged();
     }
 
-    /** Return the list of Batches currently selected */
     public List<Batch> getSelected() {
-        List<Batch> list = new ArrayList<>();
+        List<Batch> out = new ArrayList<>();
         for (Batch b : batches) {
-            if (selectedIds.contains(b.getBatchId())) {
-                list.add(b);
-            }
+            if (selectedIds.contains(b.getBatchId())) out.add(b);
         }
-        return list;
+        return out;
     }
 
     static class BatchViewHolder extends RecyclerView.ViewHolder {
         CheckBox cbSelect;
-        TextView tvBatchId, tvDestination;
+        TextView tvBatchId, tvDestination, tvCurrentLocation, tvWeight, tvStatus;
 
-        BatchViewHolder(@NonNull View itemView) {
-            super(itemView);
-            cbSelect     = itemView.findViewById(R.id.cbSelect);
-            tvBatchId    = itemView.findViewById(R.id.tvBatchId);
-            tvDestination= itemView.findViewById(R.id.tvDestination);
+        BatchViewHolder(@NonNull View v) {
+            super(v);
+            cbSelect          = v.findViewById(R.id.cbSelect);
+            tvBatchId         = v.findViewById(R.id.tvBatchId);
+            tvDestination     = v.findViewById(R.id.tvDestination);
+            tvCurrentLocation = v.findViewById(R.id.tvCurrentLocation);
+            tvWeight          = v.findViewById(R.id.tvWeight);
+            tvStatus          = v.findViewById(R.id.tvStatus);
         }
     }
 }

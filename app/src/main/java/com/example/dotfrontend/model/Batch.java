@@ -19,10 +19,10 @@ import java.util.List;
 public class Batch {
 
     private Long batchId;
+    private float weight;
     private Location destination;
-    private List<Parcel> parcels;
+    private Location currentLocation;
     private BatchStatus status;
     private Rider rider;
-    private Integer maxParcels = 10; // is the default batch size limit
 
 }

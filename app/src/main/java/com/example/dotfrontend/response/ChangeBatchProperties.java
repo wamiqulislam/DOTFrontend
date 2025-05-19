@@ -1,6 +1,8 @@
 package com.example.dotfrontend.response;
 
 
+import com.example.dotfrontend.model.Location;
+
 import lombok.Getter;
 import lombok.Setter;
 

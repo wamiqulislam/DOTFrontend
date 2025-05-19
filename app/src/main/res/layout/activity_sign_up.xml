@@ -9,7 +9,7 @@ android:padding="16dp">
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:layout_marginTop="150dp">
+    android:layout_marginTop="100dp">
 
     <EditText
         android:id="@+id/etName"
@@ -49,6 +49,27 @@ android:padding="16dp">
         android:layout_height="wrap_content"
         android:prompt="@string/account_type_prompt"
         android:layout_marginTop="10dp"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <EditText
+            android:id="@+id/etAccountNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Account Number"
+            android:visibility="gone"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Address"
+            android:visibility="gone"
+            android:inputType="textPostalAddress" />
+    </FrameLayout>
 
     <Button
         android:id="@+id/btnSignUp"

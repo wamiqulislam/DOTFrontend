@@ -31,10 +31,13 @@ public class RiderInterfaceActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SendParcelActivity.class))
         );
         findViewById(R.id.button_finish_delivery).setOnClickListener(v ->
-                startActivity(new Intent(this, ChangeParcelActivity.class))
+                startActivity(new Intent(this, FinishDeliveryActivity.class))
         );
         findViewById(R.id.button_choose_parcel).setOnClickListener(v ->
                 startActivity(new Intent(this, ChooseParcelActivity.class))
+        );
+        findViewById(R.id.button_view_batches).setOnClickListener(v ->
+                startActivity(new Intent(this, ViewBatchesActivity.class))
         );
     }
 }

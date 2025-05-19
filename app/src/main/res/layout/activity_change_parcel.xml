@@ -8,19 +8,26 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etBatchId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Batch ID"
-            android:inputType="number"/>
 
         <Spinner
             android:id="@+id/spinnerLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:prompt="@string/origin_location_prompt" />
+            android:prompt="@string/origin_location_prompt"
+            android:layout_marginTop="180dp"/>
 
+        <Button
+            android:id="@+id/btnChangeLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Batch Location"
+            android:layout_marginTop="8dp"/>
+        <Button
+            android:id="@+id/btnViewParcels"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View Parcels in Batch"
+            android:layout_marginTop="8dp"/>
         <Button
             android:id="@+id/btnDropBatch"
             android:layout_width="match_parent"

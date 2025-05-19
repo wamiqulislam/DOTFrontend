@@ -38,6 +38,10 @@
         <activity android:name=".activity.AdminInterfaceActivity" />
         <activity android:name=".activity.ViewParcelActivity" />
         <activity android:name=".activity.ChooseParcelActivity" />
+        <activity android:name=".activity.FinishDeliveryActivity" />
+        <activity android:name=".activity.ViewBatchesActivity" />
+        <activity android:name=".activity.ViewParcelsActivity" />
+
 
     </application>
 

@@ -3,7 +3,6 @@
     <string-array name="account_type_array">
         <item>Customer</item>
         <item>Rider</item>
-        <item>Admin</item>
     </string-array>
     <string name="account_type_prompt">Select Account Type</string>
     <!-- Parcel type (e.g. “Standard”, “Express”, etc) -->

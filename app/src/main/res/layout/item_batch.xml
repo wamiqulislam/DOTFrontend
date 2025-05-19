@@ -22,15 +22,33 @@
 
         <TextView
             android:id="@+id/tvBatchId"
-            android:text="Batch #123"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Batch #123"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tvDestination"
-            android:text="City, Country"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="Dest: City, Country"/>
+
+        <TextView
+            android:id="@+id/tvCurrentLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current: City, Country"/>
+
+        <TextView
+            android:id="@+id/tvWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weight: 0.0"/>
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status: UNKNOWN"/>
     </LinearLayout>
 </LinearLayout>

@@ -23,6 +23,7 @@ public class Parcel{
     private Customer customerId;
     private Batch batch;
 
+
     public Parcel(String type, float weight, Location origin, Location destination, Customer customer, Object o, String address, String sendAddress, Batch batch) {
 
         this.type = type;

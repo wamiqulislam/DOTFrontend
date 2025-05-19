@@ -19,7 +19,7 @@ import retrofit2.Response;
 import java.util.Calendar;
 
 public class SendParcelActivity extends AppCompatActivity {
-    EditText etCustId, etWeight, etPlacementDate;
+    EditText etCustId, etWeight, etPlacementDate, etSenderAddress, etAddress;
     Spinner spinnerType, spinnerOrigin, spinnerDestination;
     Button btnSend;
     ApiService api;
@@ -32,7 +32,9 @@ public class SendParcelActivity extends AppCompatActivity {
         spinnerType      = findViewById(R.id.spinnerParcelType);
         etWeight         = findViewById(R.id.etWeight);
         spinnerOrigin      = findViewById(R.id.spinnerOrigin);
+        etSenderAddress  = findViewById(R.id.etSenderAddress);
         spinnerDestination = findViewById(R.id.spinnerDestination);
+        etAddress        = findViewById(R.id.etAddress);
         etPlacementDate  = findViewById(R.id.etPlacementDate);
         btnSend          = findViewById(R.id.btnSendParcel);
 
@@ -76,12 +78,14 @@ public class SendParcelActivity extends AppCompatActivity {
 
             long   custId = Long.parseLong(etCustId.getText().toString());
             String type   = spinnerType.getSelectedItem().toString();
-            double weight = Double.parseDouble(etWeight.getText().toString());
+            float weight = (float) Double.parseDouble(etWeight.getText().toString());
             String oci = originParts[0];
             String oc  = originParts[1];
             String dci = destinationParts[0];
             String dc  = destinationParts[1];
             String pd     = etPlacementDate.getText().toString();
+            String sender = etSenderAddress.getText().toString();
+            String address = etAddress.getText().toString();
 
             if (weight > 100) {
                 Toast.makeText(this, "Parcel weight cannot exceed 100Kg", Toast.LENGTH_SHORT).show();
@@ -91,13 +95,15 @@ public class SendParcelActivity extends AppCompatActivity {
             // **SWAP** origin/destination fields to match backend's reversed findByCityAndCountry(...)
             SendParcelResponse req = new SendParcelResponse(
                     custId,
-                    type,
-                    weight,
-                    oc,
-                    oci,
-                    dc,
                     dci,
-                    pd
+                    dc,
+                    address,
+                    oci,
+                    oc,
+                    sender,
+                    pd,
+                    type,
+                    weight
             );
 
             api.addParcel(req).enqueue(new Callback<ResponseBody>() {

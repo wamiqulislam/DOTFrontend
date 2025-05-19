@@ -1,6 +1,7 @@
 package com.example.dotfrontend.api;
 
 import com.example.dotfrontend.model.Batch;
+import com.example.dotfrontend.model.Parcel;
 import com.example.dotfrontend.response.ChangeBatchProperties;
 import com.example.dotfrontend.response.ChangeDueAmountResponse;
 import com.example.dotfrontend.response.ChangeParcelPropertiesResponse;
@@ -9,6 +10,7 @@ import com.example.dotfrontend.response.RegisterVehicleResponse;
 import com.example.dotfrontend.response.SendParcelResponse;
 import com.example.dotfrontend.model.User;
 import com.example.dotfrontend.request.AssignRiderRequest;
+import com.example.dotfrontend.response.SignUpResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -25,7 +27,7 @@ public interface ApiService {
     Call<User> addUser(@Body User user);
 
     @POST("api/user/signUp")
-    Call<ResponseBody> signUp(@Body User user);
+    Call<ResponseBody> signUp(@Body SignUpResponse user);
 
     @POST("api/parcel/addParcel")
     Call<ResponseBody> addParcel(@Body SendParcelResponse r);
@@ -38,9 +40,6 @@ public interface ApiService {
 
     @POST("api/parcelLog/changeCurrentRider")
     Call<ResponseBody> changeCurrentRider(@Body ChangeParcelPropertiesResponse r);
-
-    @POST("api/parcelLog/changeDeliveredDate")
-    Call<ResponseBody> changeDeliveredDate(@Body ChangeParcelPropertiesResponse r);
 
     @POST("api/rider/registerVehicle")
     Call<ResponseBody> registerVehicle(@Body RegisterVehicleResponse r);
@@ -70,6 +69,15 @@ public interface ApiService {
     // Change location using @RequestBody
     @POST("/api/Batch/changeLocation")
     Call<ResponseBody> changeLocation(@Body ChangeBatchProperties changeRequest);
+
+    @POST("/api/parcelLog/changeDeliveredDate")
+    Call<Void> changeDeliveredDate(@Body ChangeParcelPropertiesResponse body);
+
+    @GET("/api/Batch/getriderbatches")
+    Call<List<Batch>> getRiderBatches(@Query("riderId") long riderId);
+
+    @GET("/api/parcel/getparcelsofbatch")
+    Call<List<Parcel>> getParcelsOfBatch(@Query("batchId") long batchId);
 
 }
 
