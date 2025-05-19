@@ -2,7 +2,6 @@ package com.example.dotfrontend.activity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,13 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.dotfrontend.R;
 import com.example.dotfrontend.api.ApiClient;
 import com.example.dotfrontend.api.ApiService;
-import com.example.dotfrontend.model.ChangeDueAmountResponse;
+import com.example.dotfrontend.response.ChangeDueAmountResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AdminInterfaceActivity extends AppCompatActivity {
 

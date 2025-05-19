@@ -6,18 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/etCity"
-        android:hint="City"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <EditText
-        android:id="@+id/etCountry"
-        android:hint="Country"
+    <Spinner
+        android:id="@+id/spinnerLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"/>
+        android:prompt="@string/origin_location_prompt" />
 
     <Button
         android:id="@+id/btnSearch"

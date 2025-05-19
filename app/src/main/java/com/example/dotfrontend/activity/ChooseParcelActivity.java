@@ -3,8 +3,10 @@ package com.example.dotfrontend.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,7 +26,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChooseParcelActivity extends AppCompatActivity {
-    EditText etCity, etCountry;
+
+    Spinner spinnerLocation;
     Button btnSearch, btnAssign;
     RecyclerView rvBatches;
     BatchAdapter adapter;
@@ -35,8 +38,7 @@ public class ChooseParcelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_parcel);
         session = new SessionManager(this);
-        etCity = findViewById(R.id.etCity);
-        etCountry = findViewById(R.id.etCountry);
+        spinnerLocation = findViewById(R.id.spinnerLocation);
         btnSearch = findViewById(R.id.btnSearch);
         btnAssign = findViewById(R.id.btnAssign);
         rvBatches = findViewById(R.id.rvBatches);
@@ -46,11 +48,22 @@ public class ChooseParcelActivity extends AppCompatActivity {
 
         btnSearch.setOnClickListener(v -> fetchBatches());
         btnAssign.setOnClickListener(v -> assignSelected());
+
+        ArrayAdapter<CharSequence> locAdapter = ArrayAdapter.createFromResource(
+                this, R.array.location_array,
+                android.R.layout.simple_spinner_item
+        );
+        locAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLocation.setAdapter(locAdapter);
     }
 
     void fetchBatches() {
-        String city = etCity.getText().toString().trim();
-        String country = etCountry.getText().toString().trim();
+        String locationFull = spinnerLocation.getSelectedItem().toString();
+        String[] locationParts = locationFull.split(",\\s*");
+
+
+        String city = locationParts[0];
+        String country = locationParts[1];
         if (city.isEmpty() || country.isEmpty()) {
             Toast.makeText(this, "Enter both city and country", Toast.LENGTH_SHORT).show();
             return;

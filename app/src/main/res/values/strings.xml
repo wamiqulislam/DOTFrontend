@@ -39,4 +39,15 @@
     </string-array>
     <string name="vehicle_status_prompt">Select Vehicle Status</string>
 
+    <string-array name="location_array">
+        <item>Karachi, Pakistan</item>
+        <item>Islamabad, Pakistan</item>
+        <item>Lahore, Pakistan</item>
+        <item>Sialkot, Pakistan</item>
+        <item>Beijing, China</item>
+        <item>Dubai, UAE</item>
+    </string-array>
+    <string name="origin_location_prompt">Select Origin Location</string>
+    <string name="destination_location_prompt">Select Destination Location</string>
+
 </resources>

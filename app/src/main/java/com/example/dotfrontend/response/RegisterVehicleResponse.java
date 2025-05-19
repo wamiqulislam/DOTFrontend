@@ -1,4 +1,4 @@
-package com.example.dotfrontend.model;
+package com.example.dotfrontend.response;
 
 import com.example.dotfrontend.extras.VehicleStatus;
 import com.example.dotfrontend.extras.VehicleType;

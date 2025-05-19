@@ -1,13 +1,13 @@
 package com.example.dotfrontend.model;
 
-import android.os.Parcel;
-
 import com.example.dotfrontend.extras.ParcelStatus;
+import com.example.dotfrontend.model.Parcel;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Getter
 @Setter
@@ -20,7 +20,7 @@ public class ParcelLog {
     private ParcelStatus status;
     private String placementDate;
     private Location location;
-    private Rider currentRider;
     private String deliveredDate;
+
 
 }

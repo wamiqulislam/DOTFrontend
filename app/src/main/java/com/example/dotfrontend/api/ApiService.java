@@ -1,11 +1,12 @@
 package com.example.dotfrontend.api;
 
 import com.example.dotfrontend.model.Batch;
-import com.example.dotfrontend.model.ChangeDueAmountResponse;
-import com.example.dotfrontend.model.ChangeParcelPropertiesResponse;
+import com.example.dotfrontend.response.ChangeBatchProperties;
+import com.example.dotfrontend.response.ChangeDueAmountResponse;
+import com.example.dotfrontend.response.ChangeParcelPropertiesResponse;
 import com.example.dotfrontend.model.ParcelLog;
-import com.example.dotfrontend.model.RegisterVehicleResponse;
-import com.example.dotfrontend.model.SendParcelResponse;
+import com.example.dotfrontend.response.RegisterVehicleResponse;
+import com.example.dotfrontend.response.SendParcelResponse;
 import com.example.dotfrontend.model.User;
 import com.example.dotfrontend.request.AssignRiderRequest;
 
@@ -53,15 +54,22 @@ public interface ApiService {
     @GET("/api/parcelLog")
     Call<ParcelLog> getParcelLog(@Query("parcelID") Long parcelID);
 
-    @GET("/api/Batch")
+    @GET("/api/Batch/byLocation")
     Call<List<Batch>> getBatchesByLocation(@Query("city") String city,
                                            @Query("country") String country);
 
-    @POST("/api/Batch/assignrider")
+    @POST("/api/Batch/assignRider")
     Call<Batch> assignRiderToBatch(@Body AssignRiderRequest req);
 
-    @POST("/api/rider/changeDueAmount")
+    @POST("/api/user/changeDueAmount")
     Call<Void> changeDueAmount(@Body ChangeDueAmountResponse body);
+
+    @POST("/api/Batch/dropBatch")
+    Call<ResponseBody> dropBatch(@Query("batchId") long batchId);
+
+    // Change location using @RequestBody
+    @POST("/api/Batch/changeLocation")
+    Call<ResponseBody> changeLocation(@Body ChangeBatchProperties changeRequest);
 
 }
 

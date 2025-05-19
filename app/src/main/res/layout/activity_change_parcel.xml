@@ -9,63 +9,23 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/etParcelId"
+            android:id="@+id/etBatchId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Parcel ID"
+            android:hint="Batch ID"
             android:inputType="number"/>
 
         <Spinner
-            android:id="@+id/spinnerStatus"
+            android:id="@+id/spinnerLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:prompt="@string/parcel_status_prompt"/>
-
-        <EditText
-            android:id="@+id/etLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="New Location"/>
-
-        <EditText
-            android:id="@+id/etRiderId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Rider ID"
-            android:inputType="number"/>
-
-        <EditText
-            android:id="@+id/etDeliveredDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Delivered Date (YYYY-MM-DD)"
-            android:focusable="false"/>
+            android:prompt="@string/origin_location_prompt" />
 
         <Button
-            android:id="@+id/btnChangeStatus"
+            android:id="@+id/btnDropBatch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Change Status"/>
-
-        <Button
-            android:id="@+id/btnChangeLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Change Location"
-            android:layout_marginTop="8dp"/>
-
-        <Button
-            android:id="@+id/btnChangeRider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Change Rider"
-            android:layout_marginTop="8dp"/>
-
-        <Button
-            android:id="@+id/btnChangeDeliveredDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Change Delivered Date"
+            android:text="Drop Off Batch"
             android:layout_marginTop="8dp"/>
     </LinearLayout>
 </ScrollView>

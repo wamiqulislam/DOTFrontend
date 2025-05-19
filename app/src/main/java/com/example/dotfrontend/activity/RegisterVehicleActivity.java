@@ -8,7 +8,7 @@ import com.example.dotfrontend.R;
 import com.example.dotfrontend.api.ApiClient;
 import com.example.dotfrontend.api.ApiService;
 import com.example.dotfrontend.extras.VehicleStatus;
-import com.example.dotfrontend.model.RegisterVehicleResponse;
+import com.example.dotfrontend.response.RegisterVehicleResponse;
 import com.example.dotfrontend.extras.VehicleType;
 import com.example.dotfrontend.util.SessionManager;
 

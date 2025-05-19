@@ -2,13 +2,14 @@ package com.example.dotfrontend.activity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dotfrontend.R;
 import com.example.dotfrontend.api.ApiClient;
 import com.example.dotfrontend.api.ApiService;
-import com.example.dotfrontend.model.SendParcelResponse;
+import com.example.dotfrontend.response.SendParcelResponse;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -18,9 +19,8 @@ import retrofit2.Response;
 import java.util.Calendar;
 
 public class SendParcelActivity extends AppCompatActivity {
-    EditText etCustId, etWeight, etOriginCity, etOriginCountry,
-            etDestCity, etDestCountry, etPlacementDate;
-    Spinner spinnerType;
+    EditText etCustId, etWeight, etPlacementDate;
+    Spinner spinnerType, spinnerOrigin, spinnerDestination;
     Button btnSend;
     ApiService api;
 
@@ -31,10 +31,8 @@ public class SendParcelActivity extends AppCompatActivity {
         etCustId         = findViewById(R.id.etCustomerId);
         spinnerType      = findViewById(R.id.spinnerParcelType);
         etWeight         = findViewById(R.id.etWeight);
-        etOriginCity     = findViewById(R.id.etOriginCity);
-        etOriginCountry  = findViewById(R.id.etOriginCountry);
-        etDestCity       = findViewById(R.id.etDestinationCity);
-        etDestCountry    = findViewById(R.id.etDestinationCountry);
+        spinnerOrigin      = findViewById(R.id.spinnerOrigin);
+        spinnerDestination = findViewById(R.id.spinnerDestination);
         etPlacementDate  = findViewById(R.id.etPlacementDate);
         btnSend          = findViewById(R.id.btnSendParcel);
 
@@ -44,6 +42,14 @@ public class SendParcelActivity extends AppCompatActivity {
         );
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerType.setAdapter(typeAdapter);
+
+        ArrayAdapter<CharSequence> locAdapter = ArrayAdapter.createFromResource(
+                this, R.array.location_array,
+                android.R.layout.simple_spinner_item
+        );
+        locAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerOrigin.setAdapter(locAdapter);
+        spinnerDestination.setAdapter(locAdapter);
 
         etPlacementDate.setOnClickListener(v -> {
             Calendar c = Calendar.getInstance();
@@ -61,24 +67,36 @@ public class SendParcelActivity extends AppCompatActivity {
 
         api = ApiClient.getClient().create(ApiService.class);
         btnSend.setOnClickListener(v -> {
+
+            String originFull      = spinnerOrigin.getSelectedItem().toString();
+            String destinationFull = spinnerDestination.getSelectedItem().toString();
+
+            String[] originParts      = originFull.split(",\\s*");
+            String[] destinationParts = destinationFull.split(",\\s*");
+
             long   custId = Long.parseLong(etCustId.getText().toString());
             String type   = spinnerType.getSelectedItem().toString();
             double weight = Double.parseDouble(etWeight.getText().toString());
-            String oc     = etOriginCountry.getText().toString();
-            String oci    = etOriginCity.getText().toString();
-            String dc     = etDestCountry.getText().toString();
-            String dci    = etDestCity.getText().toString();
+            String oci = originParts[0];
+            String oc  = originParts[1];
+            String dci = destinationParts[0];
+            String dc  = destinationParts[1];
             String pd     = etPlacementDate.getText().toString();
+
+            if (weight > 100) {
+                Toast.makeText(this, "Parcel weight cannot exceed 100Kg", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             // **SWAP** origin/destination fields to match backend's reversed findByCityAndCountry(...)
             SendParcelResponse req = new SendParcelResponse(
                     custId,
                     type,
                     weight,
-                    /* originCountry  = city */      oci,
-                    /* originCity     = country */   oc,
-                    /* destinationCountry = city */  dci,
-                    /* destinationCity    = country */ dc,
+                    oc,
+                    oci,
+                    dc,
+                    dci,
                     pd
             );
 

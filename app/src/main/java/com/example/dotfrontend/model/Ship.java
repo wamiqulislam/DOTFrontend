@@ -7,14 +7,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 
-public abstract class Vehicle {
+public class Ship extends Vehicle {
+    private double cargoCapacity;
 
-    private String model;
-    private String licenseNumber;
-    private VehicleStatus status;
+    public Ship(String model, String licenseNumber, VehicleStatus status, Double cargoCapacity) {
+        super(model,licenseNumber,status);
+        this.cargoCapacity = cargoCapacity;
+    }
 }

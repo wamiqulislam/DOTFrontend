@@ -1,4 +1,4 @@
-package com.example.dotfrontend.model;
+package com.example.dotfrontend.response;
 
 public class ChangeParcelPropertiesResponse {
     private Long parcelId;

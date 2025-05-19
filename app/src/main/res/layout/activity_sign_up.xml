@@ -8,41 +8,47 @@ android:padding="16dp">
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:layout_marginTop="150dp">
 
     <EditText
         android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Name"
-        android:inputType="textPersonName"/>
+        android:inputType="textPersonName"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
-        android:inputType="textEmailAddress"/>
+        android:inputType="textEmailAddress"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/etPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Phone"
-        android:inputType="phone"/>
+        android:inputType="phone"
+        android:layout_marginTop="10dp"/>
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp"/>
 
     <Spinner
         android:id="@+id/spinnerAccountType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:prompt="@string/account_type_prompt" />
+        android:prompt="@string/account_type_prompt"
+        android:layout_marginTop="10dp"/>
 
     <Button
         android:id="@+id/btnSignUp"
