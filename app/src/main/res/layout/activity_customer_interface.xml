@@ -22,7 +22,7 @@
         android:id="@+id/button_view_parcel_status"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="View Parcel Status"
+        android:text="View Your Parcels"
         android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@id/text_user_info"
         app:layout_constraintStart_toStartOf="parent"

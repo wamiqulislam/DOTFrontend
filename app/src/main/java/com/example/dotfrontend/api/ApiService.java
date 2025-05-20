@@ -79,5 +79,8 @@ public interface ApiService {
     @GET("/api/parcel/getparcelsofbatch")
     Call<List<Parcel>> getParcelsOfBatch(@Query("batchId") long batchId);
 
+    @GET("/api/parcel/getparcelsofcustomer")
+    Call<List<Parcel>> getParcelsOfCustomer(@Query("customerId") Long customerId);
+
 }
 

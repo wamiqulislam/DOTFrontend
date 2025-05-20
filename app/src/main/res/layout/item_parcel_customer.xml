@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvParcelId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Parcel #123"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type: Electronics"/>
+
+    <TextView
+        android:id="@+id/tvWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight: 2.5"/>
+
+    <TextView
+        android:id="@+id/tvOrigin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Origin: City A, Country A"/>
+
+    <TextView
+        android:id="@+id/tvDestination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dest: City B, Country B"/>
+
+    <TextView
+        android:id="@+id/tvSendAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sender Addr: 123 Main St"/>
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Receiver Addr: 456 Elm Rd"/>
+
+    <TextView
+        android:id="@+id/tvBatchId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Batch ID: 789"/>
+</LinearLayout>

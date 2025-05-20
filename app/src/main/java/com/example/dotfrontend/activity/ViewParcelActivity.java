@@ -1,89 +1,72 @@
 package com.example.dotfrontend.activity;
 
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dotfrontend.R;
+import com.example.dotfrontend.adapter.ParcelCustomerAdapter;
 import com.example.dotfrontend.api.ApiClient;
 import com.example.dotfrontend.api.ApiService;
-import com.example.dotfrontend.model.ParcelLog;
+import com.example.dotfrontend.model.Parcel;
+import com.example.dotfrontend.util.SessionManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ViewParcelActivity extends AppCompatActivity {
-
-    private EditText editParcelId;
-    private Button buttonView;
-    private TextView textParcelInfo;
-    private ApiService apiService;
+    private RecyclerView rvParcels;
+    private SessionManager session;
+    private ApiService api;
+    private ParcelCustomerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_parcel);
 
-        editParcelId    = findViewById(R.id.edit_parcel_id);
-        buttonView      = findViewById(R.id.button_view);
-        textParcelInfo  = findViewById(R.id.text_parcel_info);
+        rvParcels = findViewById(R.id.rvParcels);
+        rvParcels.setLayoutManager(new LinearLayoutManager(this));
 
-        apiService = ApiClient.getClient().create(ApiService.class);
+        session = new SessionManager(this);
+        api     = ApiClient.getClient().create(ApiService.class);
 
-        buttonView.setOnClickListener(v -> {
-            String idStr = editParcelId.getText().toString().trim();
-            if (idStr.isEmpty()) {
-                Toast.makeText(this, "Please enter a Parcel ID", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            long parcelId;
-            try {
-                parcelId = Long.parseLong(idStr);
-            } catch (NumberFormatException e) {
-                Toast.makeText(this, "Invalid Parcel ID", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            fetchParcelLog(parcelId);
-        });
+        adapter = new ParcelCustomerAdapter(new ArrayList<>());
+        rvParcels.setAdapter(adapter);
+
+        fetchParcelsForCustomer();
     }
 
-    private void fetchParcelLog(long parcelId) {
-        apiService.getParcelLog(parcelId)
-                .enqueue(new Callback<ParcelLog>() {
+    private void fetchParcelsForCustomer() {
+        long customerId = session.getUserId();
+        api.getParcelsOfCustomer(customerId)
+                .enqueue(new Callback<List<Parcel>>() {
                     @Override
-                    public void onResponse(Call<ParcelLog> call, Response<ParcelLog> response) {
-                        if (!response.isSuccessful()) {
-                            textParcelInfo.setText("not succesful " + parcelId);
-                            String err = "Error " + response.code();
-                            Toast.makeText(ViewParcelActivity.this, err, Toast.LENGTH_LONG).show();
+                    public void onResponse(Call<List<Parcel>> call,
+                                           Response<List<Parcel>> resp) {
+                        if (!resp.isSuccessful()) {
+                            Toast.makeText(ViewParcelActivity.this,
+                                    "Error: " + resp.code(),
+                                    Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        if (response.body() == null) {
-                            textParcelInfo.setText("No log found for ID " + parcelId);
-                            return;
-                        }
-                        ParcelLog log = response.body();
-                        StringBuilder sb = new StringBuilder()
-                                .append("Log ID: ").append(log.getLogId()).append("\n")
-                                .append("Status: ").append(log.getStatus()).append("\n")
-                                .append("Placement Date: ").append(log.getPlacementDate()).append("\n")
-                                .append("Location: ")
-                                .append(log.getLocation() != null
-                                        ? log.getLocation().getCity()
-                                        : "N/A").append("\n")
-                                .append("Delivered Date: ").append(log.getDeliveredDate());
-
-                        textParcelInfo.setText(sb.toString());
+                        List<Parcel> list = resp.body();
+                        adapter.updateData(list != null
+                                ? list
+                                : new ArrayList<>());
                     }
-
                     @Override
-                    public void onFailure(Call<ParcelLog> call, Throwable t) {
-                        textParcelInfo.setText("Error: " + t.getMessage());
+                    public void onFailure(Call<List<Parcel>> call, Throwable t) {
+                        Toast.makeText(ViewParcelActivity.this,
+                                "Failure: " + t.getMessage(),
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
