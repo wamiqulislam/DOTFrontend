@@ -17,7 +17,7 @@ import lombok.Setter;
 public class Rider extends User {
 
     private Vehicle vehicleId;
-    private int accoundNo;
+    private String accoundNo;
     private float dueAmount = 0;
 
 }

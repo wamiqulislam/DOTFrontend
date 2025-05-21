@@ -1,5 +1,6 @@
 package com.example.dotfrontend.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +23,14 @@ public class BatchViewAdapter extends RecyclerView.Adapter<BatchViewAdapter.View
     public BatchViewAdapter(List<Batch> batches, OnItemClickListener listener) {
         this.batches = batches;
         this.listener = listener;
+        Log.d("BatchViewAdapter", "........................................3");
+
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d("BatchViewAdapter", "........................................1");
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_batch_simple, parent, false);
         return new ViewHolder(v);
@@ -34,6 +38,8 @@ public class BatchViewAdapter extends RecyclerView.Adapter<BatchViewAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Log.d("BatchViewAdapter", "........................................4");
+
         Batch b = batches.get(position);
         holder.tvBatchId.setText("Batch #" + b.getBatchId());
         holder.tvDestination.setText("Dest: " + b.getDestination().getCity() + ", " + b.getDestination().getCountry());

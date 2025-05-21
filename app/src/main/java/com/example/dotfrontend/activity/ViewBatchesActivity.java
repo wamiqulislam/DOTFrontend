@@ -2,6 +2,7 @@ package com.example.dotfrontend.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ViewBatchesActivity extends AppCompatActivity {
+
     private RecyclerView rvBatches;
     private SessionManager session;
     private ApiService api;
@@ -38,6 +40,7 @@ public class ViewBatchesActivity extends AppCompatActivity {
         api     = ApiClient.getClient().create(ApiService.class);
 
         fetchAndShowBatches();
+        Log.d("BatchViewAdapter", "........................................20");
     }
 
     private void fetchAndShowBatches() {
@@ -48,11 +51,14 @@ public class ViewBatchesActivity extends AppCompatActivity {
                     public void onResponse(Call<List<Batch>> call,
                                            Response<List<Batch>> resp) {
                         if (!resp.isSuccessful()) {
+                            Log.d("BatchViewAdapter", "........................................40");
+
                             Toast.makeText(ViewBatchesActivity.this,
                                     "Error: " + resp.code(),
                                     Toast.LENGTH_SHORT).show();
                             return;
                         }
+                        Log.d("BatchViewAdapter", "........................................42");
 
                         List<Batch> list = resp.body();
                         BatchViewAdapter adapter = new BatchViewAdapter(
@@ -71,6 +77,11 @@ public class ViewBatchesActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<List<Batch>> call, Throwable t) {
+
+                        Log.d("BatchViewAdapter", "........................................41");
+                        Log.e("BatchViewAdapter", "onFailure: ", t);
+
+
                         Toast.makeText(ViewBatchesActivity.this,
                                 t.getMessage(),
                                 Toast.LENGTH_SHORT).show();

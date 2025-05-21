@@ -9,12 +9,20 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 
-public abstract class Vehicle {
+
+public class Vehicle {
 
     private String model;
     private String licenseNumber;
     private VehicleStatus status;
+
+    public Vehicle(String model, String licenseNumber, VehicleStatus status) {
+        this.model = model;
+        this.licenseNumber = licenseNumber;
+        this.status = status;
+    }
+
+    public Vehicle() {
+    }
 }
